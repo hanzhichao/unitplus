@@ -3,19 +3,25 @@
 """Tests for `unitplus` package."""
 
 
-import unittest
 
-from unitplus import unitplus
+from unitplus import TestCase, test
 
 
-class TestUnitplus(unittest.TestCase):
-    """Tests for `unitplus` package."""
+class TestDemo(TestCase):
+    priority = 'p1'
+    status = 'ready'
+    owner = 'superhin'
+    iteration = 'v0.1.0'
 
-    def setUp(self):
-        """Set up test fixtures, if any."""
+    @test(title='test demo a', priority='p2')
+    def test_a(self):
+        self.logger.info('a demo test case')
 
-    def tearDown(self):
-        """Tear down test fixtures, if any."""
+    @test(title='test ddt with data',data=['a', 'b', 'c'])
+    def test_b(self, item):
+        self.logger.info('item =', item)
 
-    def test_000_something(self):
-        """Test something."""
+
+from unitplus import TestPlan
+
+
