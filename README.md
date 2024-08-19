@@ -1,11 +1,11 @@
 # unitplus
-Enhancement for unittest
-
 
 ![Languate - Python](https://img.shields.io/badge/language-python-blue.svg)
 ![PyPI - License](https://img.shields.io/pypi/l/unitplus)
 ![PyPI](https://img.shields.io/pypi/v/unitplus)
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/unitplus)
+
+Enhancement for unittest by adding status, priority, tags, owner properties for testcases and filters.
 
 
 ## Install
@@ -13,48 +13,37 @@ Enhancement for unittest
 pip install unitplus
 ```
 
-## Simple Use
-
-### Register and Login
-```python
-from python_yapi import YApi
-yapi = YApi(base_url='http://localhost:3000')
-
-username, email, password = 'Kevin', 'kevin@126.com', 'abc123'
-
-yapi.register(username, email, password)  # return a dict
-yapi.login( email, password) # return a dict
-```
-
-
 ### Simple Use
 #### Write TestCase
 ```python
-from unitplus import TestCase, test
+import unitplus
 
 
-class TestDemo(TestCase):
+class TestDemo(unitplus.TestCase):
     priority = 'p1'
     status = 'ready'
     owner = 'superhin'
     iteration = 'v0.1.0'
     tags = ['demo']
 
-    @test(title='test demo a', priority='p2')
+    @unitplus.test(title='test demo a', priority='p2')
     def test_a(self):
         self.logger.info('a demo test case')
 
-    @test(title='test ddt with data',data=['a', 'b', 'c'])
+    @unitplus.test(title='test ddt with data',data=['a', 'b', 'c'])
     def test_b(self, item):
         self.logger.info('item =', item)
+
+if __name__ == '__main__':
+    unitplus.main()
 ```
 
 ### Use TesPlan  to run tests
 ```python
-from unitplus import TestPlan
+import unitplus
 
 
-class TestPlanDemo(TestPlan):
+class TestPlanDemo(unitplus.TestPlan):
     # test names for suite
     tests = [
         'cases.testdemo',
